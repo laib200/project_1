@@ -1,4 +1,4 @@
-# # # ------ git-comands --------
+#  ------ git-comands --------
 # pull:
 #     git pull
 # push:
