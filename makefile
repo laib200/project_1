@@ -1,3 +1,17 @@
+# # # ------ git-comands --------
+# pull:
+#     git pull
+# push:
+#     git push
+# add:
+#     git add *
+# status:
+#     git status
+# commit:
+# 	@read -p "add message:" var;\
+#     git commit -m $$var
+
+
 #-----[auth]
 #     changepassword
 user:
