@@ -17,14 +17,25 @@ class ViewMeals(ModelViewSet):
         if 'stars' in request.data:
             meal = Meals.objects.get(id=pk)
             username =  request.get('username')
-            user = User.objects.filter(username=username)
+            user = User.objects.get(username=username)
             stars = request.get('stars')
             try:
-                pass
+                rating = Rating.objects.get(user=user.id, meal=meal.id)
+                rating.stars = stars
+                rating.save()
+                serializer = RatingSerializer(rating=rating,many=False)
+                response = {
+                    'message': 'Rating updated',
+                    'data': serializer.data 
+                }
+                return Response(response,status=status.HTTP_200_OK)
             except:
-                pass
+                rating = Rating.objects.create(meal=meal,user=user,stars=stars)
         else:
-            pass
+            response = {
+                "message": 'bad request'
+            }
+            return Response(response,status=status.HTTP_400_BAD_REQUEST)
 
 class ViewRating(ModelViewSet):
     queryset = Rating.objects.all()
