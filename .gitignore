@@ -162,3 +162,8 @@ cython_debug/
 # vscode
 .vscode/
 main.txt
+test/
+.makefile
+makefile
+makefile/
+.makefile/
