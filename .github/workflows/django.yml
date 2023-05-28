@@ -25,6 +25,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Test
+    - name: Run SERVER
       run: |
         python manage.py runserver
