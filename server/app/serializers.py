@@ -8,7 +8,7 @@ class UserSerializer(ModelSerializer):
 class MealsSerializer(ModelSerializer):
     class Meta:
         model = Meals
-        fields = '__all__'
+        fields = ['title','description','number_of_ratings','average_rating']
 
 class RatingSerializer(ModelSerializer):
     class Meta:

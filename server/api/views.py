@@ -5,6 +5,8 @@ from app.models import Meals, Rating
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated,IsAdminUser,AllowAny,IsAuthenticatedOrReadOnly
 
 
 class ViewMeals(ModelViewSet):
@@ -46,3 +48,6 @@ class ViewMeals(ModelViewSet):
 class ViewRating(ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes =[IsAuthenticatedOrReadOnly,]
+    http_method_names = ('get')
