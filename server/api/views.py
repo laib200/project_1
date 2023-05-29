@@ -1,31 +1,31 @@
 from django.contrib.auth.models import User
 from rest_framework.viewsets import ModelViewSet
-from app.serializers import MealsSerializer, RatingSerializer
+from app.serializers import MealsSerializer, RatingSerializer,UserSerializer
 from app.models import Meals, Rating
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated,IsAdminUser,AllowAny,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import AllowAny
 
+
+
+class ViewUser(ModelViewSet):
+    queryset= User.objects.all()
+    serializer_class = UserSerializer
+    authentication_classes=[TokenAuthentication]
+    pagination_class = [AllowAny]
 
 class ViewMeals(ModelViewSet):
     queryset = Meals.objects.all()
     serializer_class = MealsSerializer
 
     @action(detail=True, methods=["post"])
-    def rate_meals(
-        self,
-        request,
-        pk=None,
-    ):
+    def rate_meals(self,request,pk=None,):
         if "stars" in request.data:
             meal = Meals.objects.get(id=pk)
-
-            username = request.data["username"]
-
-            user = User.objects.get(username=username)
-
+            user = request.user
             stars = request.data["stars"]
 
             try:
@@ -48,6 +48,4 @@ class ViewMeals(ModelViewSet):
 class ViewRating(ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes =[IsAuthenticatedOrReadOnly,]
-    http_method_names = ('get')
+    http_method_names = "get"

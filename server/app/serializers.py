@@ -1,9 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Meals,Rating
+from django.contrib.auth.models import User
 
 
 class UserSerializer(ModelSerializer):
-    pass
+    model = User.objects.all()
+    fields = ['id', 'username', 'password']
 
 class MealsSerializer(ModelSerializer):
     class Meta:
