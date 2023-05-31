@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class UserSerializer(ModelSerializer):
     model = User.objects.all()
     fields = ['id', 'username', 'password']
+    extra_kwargs = {'password': {'write_only': True},'required': True}
 
 class MealsSerializer(ModelSerializer):
     class Meta:

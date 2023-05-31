@@ -14,7 +14,7 @@ from rest_framework.permissions import AllowAny
 class ViewUser(ModelViewSet):
     queryset= User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes=[TokenAuthentication]
+    authentication_classes=[TokenAuthentication] 
     pagination_class = [AllowAny]
 
 class ViewMeals(ModelViewSet):
@@ -27,7 +27,6 @@ class ViewMeals(ModelViewSet):
             meal = Meals.objects.get(id=pk)
             user = request.user
             stars = request.data["stars"]
-
             try:
                 rating = Rating.objects.get(user=user.id, meal=meal.id)
                 rating.stars = stars
