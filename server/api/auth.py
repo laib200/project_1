@@ -27,3 +27,14 @@ class ViewRegister(ModelViewSet):
         )
 
 
+class ViewLogin(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+    http_method_names = [
+        "post",
+    ]
+    def create(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.data["username"])
+        token = Token.objects.get(user=user)
+        return Response({"token": token.key}, status=status.HTTP_200_OK)

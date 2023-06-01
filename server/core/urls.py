@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 from api import auth
 auth_routers = DefaultRouter()
 auth_routers.register('register',auth.ViewRegister,basename='register')
+auth_routers.register('login',auth.ViewLogin,basename='login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
