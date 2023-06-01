@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 
 # Create your models here.
@@ -37,3 +41,10 @@ class Rating(models.Model):
     class Meta:
         unique_together = (("user", "meal"),)
         index_together = (("user", "meal"),)
+
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def TokenCerated(sender, instance, created, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

@@ -6,16 +6,8 @@ from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import AllowAny
 
 
-
-class ViewUser(ModelViewSet):
-    queryset= User.objects.all()
-    serializer_class = UserSerializer
-    authentication_classes=[TokenAuthentication] 
-    pagination_class = [AllowAny]
 
 class ViewMeals(ModelViewSet):
     queryset = Meals.objects.all()
