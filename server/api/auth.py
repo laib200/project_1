@@ -35,6 +35,12 @@ class ViewLogin(ModelViewSet):
         "post",
     ]
     def create(self, request, *args, **kwargs):
-        user = User.objects.get(username=request.data["username"])
-        token = Token.objects.get(user=user)
-        return Response({"token": token.key}, status=status.HTTP_200_OK)
+        try:
+            user = User.objects.get(username=request.data["username"]) 
+            token = Token.objects.get(user=user)
+            return Response({"token": token.key}, status=status.HTTP_200_OK)
+        except:
+            return Response(
+                {"error": 'bad request'}, status=status.HTTP_400_BAD_REQUEST
+            )
+        
