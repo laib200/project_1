@@ -13,7 +13,7 @@ class UserSerializer(ModelSerializer):
 class MealsSerializer(ModelSerializer):
     class Meta:
         model = Meals
-        fields = ["title", "description", "number_of_ratings", "average_rating"]
+        fields = ["id","title", "description", "number_of_ratings", "average_rating"]
 
 
 class RatingSerializer(ModelSerializer):

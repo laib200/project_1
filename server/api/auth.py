@@ -11,9 +11,7 @@ class ViewRegister(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-    http_method_names = [
-        "post",
-    ]
+    http_method_names = ["post",]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -31,9 +29,7 @@ class ViewLogin(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-    http_method_names = [
-        "post",
-    ]
+    http_method_names = ["post",]
     def create(self, request, *args, **kwargs):
         try:
             user = User.objects.get(username=request.data["username"]) 
