@@ -17,5 +17,5 @@ run:migrate
 
 
 #________________test_________________
-t:
+testapp:
 	python test\main.py

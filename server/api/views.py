@@ -5,13 +5,14 @@ from app.models import Meals, Rating
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
-from django.contrib.auth.models import User
 
 
 
 class ViewMeals(ModelViewSet):
     queryset = Meals.objects.all()
     serializer_class = MealsSerializer
+    
+
 
     @action(detail=True, methods=["post"])
     def rate_meals(self,request,pk=None,):
