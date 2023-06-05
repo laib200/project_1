@@ -1,5 +1,6 @@
 
-
+activate:
+	env.bat
 
 
 user:

@@ -37,6 +37,6 @@ class ViewLogin(ModelViewSet):
             return Response({"token": token.key}, status=status.HTTP_200_OK)
         except:
             return Response(
-                {"error": 'bad request'}, status=status.HTTP_400_BAD_REQUEST
+                {"massage":[ 'bad request',]}, status=status.HTTP_400_BAD_REQUEST
             )
         

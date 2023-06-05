@@ -121,6 +121,7 @@ celerybeat.pid
 
 # Environments
 .env
+env.bat
 .venv
 env/
 venv/
@@ -163,3 +164,4 @@ cython_debug/
 .vscode/
 test/
 main.txt
+makefile

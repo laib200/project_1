@@ -25,15 +25,15 @@ class ViewMeals(ModelViewSet):
                 rating.stars = stars
                 rating.save()
                 serializer = RatingSerializer(rating, many=False)
-                response = {"message": "Rating updated", "data": serializer.data}
+                response = {"message": ["Rating updated",], "data": serializer.data}
                 return Response(response, status=status.HTTP_301_MOVED_PERMANENTLY)
             except:
-                rating = Rating.objects.create(meal=meal, user=user, stars=stars)
+                rating = Rating.objects.create(meal=meal, user=user, stars=stars) 
                 serializer = RatingSerializer(rating, many=False)
-                response = {"massage": "Rating created", "data": serializer.data}
+                response = {"massage": ["Rating created",], "data": serializer.data}
                 return Response(response, status=status.HTTP_201_CREATED)
         else:
-            response = {"message": "bad request"}
+            response = {"stars": ["This field is required.",]}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
