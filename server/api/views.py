@@ -19,7 +19,7 @@ class ViewMeals(ModelViewSet):
             user = request.user
             stars = request.data["stars"]
             try:
-                rating = Rating.objects.get(user=user.id, meal=meal.uuid)
+                rating = Rating.objects.get(user=user.id, meal=meal.id)
                 rating.stars = stars
                 rating.save()
                 serializer = RatingSerializer(rating, many=False)

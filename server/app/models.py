@@ -5,9 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+import uuid
 
 # Create your models here.
 class Meals(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=360)
 
@@ -30,6 +32,7 @@ class Meals(models.Model):
 
 
 class Rating(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     meal = models.ForeignKey(Meals, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     stars = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
