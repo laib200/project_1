@@ -1,7 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Meals, Rating
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 
 
 class UserSerializer(ModelSerializer):

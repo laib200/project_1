@@ -1,6 +1,5 @@
-from django.contrib.auth.models import User
 from rest_framework.viewsets import ModelViewSet
-from app.serializers import MealsSerializer, RatingSerializer,UserSerializer
+from app.serializers import MealsSerializer, RatingSerializer
 from app.models import Meals, Rating
 from rest_framework.decorators import action
 from rest_framework import status
@@ -11,7 +10,6 @@ from rest_framework.response import Response
 class ViewMeals(ModelViewSet):
     queryset = Meals.objects.all()
     serializer_class = MealsSerializer
-    
 
 
     @action(detail=True, methods=["post"])
@@ -21,7 +19,7 @@ class ViewMeals(ModelViewSet):
             user = request.user
             stars = request.data["stars"]
             try:
-                rating = Rating.objects.get(user=user.id, meal=meal.id)
+                rating = Rating.objects.get(user=user.id, meal=meal.uuid)
                 rating.stars = stars
                 rating.save()
                 serializer = RatingSerializer(rating, many=False)
@@ -35,6 +33,7 @@ class ViewMeals(ModelViewSet):
         else:
             response = {"stars": ["This field is required.",]}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class ViewRating(ModelViewSet):

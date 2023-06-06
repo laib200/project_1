@@ -11,6 +11,7 @@ python = "^3.10"
 django = "^4.2.1"
 djangorestframework = "^3.14.0"
 python-dotenv = "^1.0.0"
+uuid = "^1.30"
 
 
 [build-system]
